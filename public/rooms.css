@@ -1,0 +1,82 @@
+.rooms { padding: 96px 24px; background: #07080c; color: #fff; }
+.rooms__title { text-align: center; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; letter-spacing: -0.02em; }
+.rooms__sub { text-align: center; opacity: .6; margin: 8px 0 48px; }
+.rooms__grid { display: grid; gap: 28px; max-width: 1200px; margin: 0 auto; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+
+/* ---------- card + glow ---------- */
+.room-card {
+  position: relative; display: block; padding: 0; border: 1px solid rgba(255,255,255,.08);
+  border-radius: 20px; overflow: hidden; cursor: pointer; background: #000; aspect-ratio: 16 / 10;
+  transition: transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .5s ease, border-color .5s ease;
+}
+.room-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.2s cubic-bezier(.2,.8,.2,1), filter .6s ease; filter: saturate(.85) brightness(.85); }
+.room-card__shade { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.85), transparent 55%); transition: opacity .5s; }
+.room-card__label { position: absolute; left: 20px; right: 20px; bottom: 18px; text-align: left; display: grid; gap: 2px; transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+.room-card__label strong { font-size: 1.15rem; }
+.room-card__label em { font-style: normal; font-size: .85rem; opacity: .7; }
+
+.room-card:hover, .room-card:focus-visible {
+  transform: translateY(-8px) scale(1.02);
+  border-color: var(--glow);
+  box-shadow: 0 0 0 1px var(--glow), 0 0 28px var(--glow), 0 0 80px color-mix(in srgb, var(--glow) 55%, transparent), 0 30px 80px -20px var(--glow2);
+  outline: none;
+}
+.room-card:hover img, .room-card:focus-visible img { transform: scale(1.08); filter: saturate(1.15) brightness(1.05); }
+.room-card:hover .room-card__label { transform: translateY(-6px); text-shadow: 0 0 18px var(--glow); }
+.room-card::after { /* sweeping light */
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(115deg, transparent 35%, color-mix(in srgb, var(--glow) 35%, transparent) 50%, transparent 65%);
+  transform: translateX(-120%); transition: transform 1s ease;
+}
+.room-card:hover::after { transform: translateX(120%); }
+
+/* ---------- immersive world ---------- */
+.world {
+  position: fixed; inset: 0; z-index: 9999; background: #000; overflow: hidden;
+  transition: clip-path .8s cubic-bezier(.76,0,.24,1);
+}
+.world__stage { position: absolute; inset: -4%; --px: 0; --py: 0; }
+.world__img {
+  width: 100%; height: 100%; object-fit: cover;
+  transform: translate3d(calc(var(--px) * -18px), calc(var(--py) * -12px), 0) scale(1.08);
+  transition: transform .4s ease-out;
+  animation: kenburns 18s ease-in-out infinite alternate;
+}
+@keyframes kenburns { from { scale: 1; } to { scale: 1.12; } }
+.world__wash { position: absolute; inset: 0; mix-blend-mode: soft-light; opacity: .55;
+  background: radial-gradient(circle at 50% 30%, var(--glow), transparent 65%); animation: pulse 4s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: .85; } }
+.world__vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,.75)), linear-gradient(to top, rgba(0,0,0,.8), transparent 45%); }
+
+.world__particles i {
+  position: absolute; bottom: -10px; left: calc(var(--k) * 5.5%); width: 4px; height: 4px; border-radius: 50%;
+  background: var(--glow2); box-shadow: 0 0 12px 3px var(--glow2); opacity: 0;
+  animation: rise calc(6s + var(--k) * .35s) linear calc(var(--k) * -.6s) infinite;
+}
+@keyframes rise { 0% { transform: translateY(0); opacity: 0; } 15% { opacity: .9; } 100% { transform: translateY(-105vh) translateX(30px); opacity: 0; } }
+
+.world__ui { position: absolute; left: clamp(24px, 6vw, 80px); bottom: clamp(32px, 9vh, 100px); max-width: 640px; }
+.world__ui > * { opacity: 0; transform: translateY(28px); }
+.world.is-open .world__ui > * { animation: up .9s cubic-bezier(.2,.8,.2,1) forwards; }
+.world.is-open .world__ui > :nth-child(1) { animation-delay: .55s; }
+.world.is-open .world__ui > :nth-child(2) { animation-delay: .7s; }
+.world.is-open .world__ui > :nth-child(3) { animation-delay: .85s; }
+.world.is-open .world__ui > :nth-child(4) { animation-delay: 1s; }
+@keyframes up { to { opacity: 1; transform: none; } }
+.world__eyebrow { letter-spacing: .3em; text-transform: uppercase; font-size: .75rem; color: var(--glow); text-shadow: 0 0 12px var(--glow); }
+.world__name { font-size: clamp(2.2rem, 6vw, 4.5rem); font-weight: 800; line-height: 1.05; margin: 10px 0; text-shadow: 0 0 40px var(--glow); }
+.world__tag { font-size: 1.1rem; opacity: .8; margin-bottom: 24px; }
+.world__cta { display: inline-block; padding: 14px 28px; border-radius: 999px; color: #fff; text-decoration: none; font-weight: 600;
+  background: color-mix(in srgb, var(--glow) 30%, transparent); border: 1px solid var(--glow); box-shadow: 0 0 24px var(--glow); transition: transform .3s, box-shadow .3s; }
+.world__cta:hover { transform: scale(1.05); box-shadow: 0 0 48px var(--glow); }
+
+.world__close, .world__nav { position: absolute; z-index: 2; border: 1px solid rgba(255,255,255,.25); background: rgba(0,0,0,.4); color: #fff; backdrop-filter: blur(8px); cursor: pointer; border-radius: 999px; transition: box-shadow .3s, border-color .3s; }
+.world__close:hover, .world__nav:hover { border-color: var(--glow); box-shadow: 0 0 22px var(--glow); }
+.world__close { top: 24px; right: 24px; width: 46px; height: 46px; font-size: 1.1rem; }
+.world__nav { top: 50%; width: 52px; height: 52px; font-size: 2rem; line-height: 1; transform: translateY(-50%); }
+.world__nav--prev { left: 20px; } .world__nav--next { right: 20px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .world__img, .world__wash, .world__particles i { animation: none; }
+  .world, .room-card, .room-card img { transition-duration: .01s; }
+}

@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import ScrollFilm from "@/components/ScrollFilm";
 import Experience from "@/components/Experience";
 import Suites from "@/components/Suites";
+import RoomRates from "@/components/RoomRates";
 import FoodDrinks from "@/components/FoodDrinks";
 import Nightlife from "@/components/Nightlife";
 import BookingForm from "@/components/BookingForm";
@@ -19,6 +20,7 @@ export default function Home() {
         <ScrollFilm />
         <Experience />
         <Suites />
+        <RoomRates />
         <FoodDrinks />
         <Nightlife />
         <BookingForm />

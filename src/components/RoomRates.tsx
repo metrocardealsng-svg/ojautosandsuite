@@ -61,9 +61,14 @@ export default function RoomRates() {
                 <h3>{branch.branchName}</h3>
                 <p>{branch.address}</p>
               </div>
-              <a className="btn btn--ghost" href={`https://wa.me/${site.contact.whatsappNumber}`} target="_blank" rel="noopener noreferrer">
-                WHATSAPP
-              </a>
+              <div className={styles.branchActions}>
+                <a className="btn btn--ghost" href="tel:08081688475">
+                  CALL 0808 168 8475
+                </a>
+                <a className="btn btn--crimson" href="https://wa.me/2348081688475?text=Hello%20OJAUTOLOUNGE%20AND%20SUITE%20Rumagholu%20branch%2C%20I%20would%20like%20to%20enquire%20about%20room%20availability." target="_blank" rel="noopener noreferrer">
+                  WHATSAPP
+                </a>
+              </div>
             </div>
 
             <div className={styles.roomTable}>

@@ -67,6 +67,7 @@ export default function BookingForm() {
         <div className="book__intro">
           <h2 id="book-title" className="display">SEND AN ENQUIRY</h2>
           <p className="lede">Fill this in and we open WhatsApp with your details written out. Our team replies with availability and the current rate.</p>
+          <p className="note">Call or WhatsApp <a href={`tel:${site.contact.phone.replace(/\s/g, "")}`}>{site.contact.phone}</a> if you prefer to speak directly.</p>
           <p className="note">This is an enquiry. Nothing is booked or paid until the team confirms on WhatsApp.</p>
         </div>
 

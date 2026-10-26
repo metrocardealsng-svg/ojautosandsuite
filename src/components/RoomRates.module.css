@@ -1,0 +1,193 @@
+.rates {
+  background: var(--warm);
+  overflow: hidden;
+}
+
+.heading {
+  max-width: 760px;
+  margin-bottom: clamp(3rem, 7vw, 5rem);
+}
+
+.locationBlock {
+  border-top: 6px solid var(--ink);
+  background: #fff;
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+}
+
+.locationBlock + .locationBlock {
+  margin-top: 3rem;
+}
+
+.locationHead {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.locationHead h3 {
+  margin-top: .25rem;
+  font: 800 clamp(2rem, 5vw, 4rem)/.9 var(--display);
+  text-transform: uppercase;
+}
+
+.locationHead p:last-child {
+  max-width: 60ch;
+  margin-top: .7rem;
+  color: var(--grey);
+}
+
+.kicker {
+  font: 700 .72rem/1 var(--body);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--crimson);
+}
+
+.rateGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 1px;
+  background: var(--line);
+}
+
+.card {
+  background: #fff;
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 3px solid var(--ink);
+  font: 800 1rem/1 var(--display);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.cardTop span:last-child {
+  color: var(--crimson);
+}
+
+.card ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.card li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .9rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.card li:last-child {
+  border-bottom: 0;
+}
+
+.card strong,
+.roomRow strong {
+  white-space: nowrap;
+  font: 800 1rem/1 var(--display);
+}
+
+.branch {
+  border-top-color: var(--crimson);
+}
+
+.roomTable {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 1px;
+}
+
+.roomRow {
+  min-height: 92px;
+  display: grid;
+  grid-template-columns: 4rem 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.roomNumber {
+  font: 800 clamp(1.7rem, 3vw, 2.6rem)/1 var(--display);
+  color: var(--crimson);
+}
+
+.roomCategory {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  font-size: .82rem;
+}
+
+.contactBar {
+  margin-top: 3rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  background: var(--ink);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.phone {
+  margin-top: .35rem;
+  font: 800 clamp(2rem, 5vw, 3.6rem)/.9 var(--display);
+}
+
+@media (max-width: 760px) {
+  .locationHead {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .locationHead .btn {
+    width: 100%;
+  }
+
+  .rateGrid,
+  .roomTable {
+    grid-template-columns: 1fr;
+  }
+
+  .roomRow {
+    grid-template-columns: 3.5rem 1fr auto;
+  }
+
+  .contactBar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .contactBar .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 420px) {
+  .roomRow {
+    gap: .7rem;
+    padding-inline: .8rem;
+  }
+
+  .roomCategory {
+    font-size: .74rem;
+  }
+
+  .card li {
+    font-size: .95rem;
+  }
+}

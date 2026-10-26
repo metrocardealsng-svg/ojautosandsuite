@@ -24,6 +24,11 @@ export default function Location() {
                   {branch.address}
                 </address>
                 <a className="btn btn--ghost" href={maps} target="_blank" rel="noopener noreferrer">Open Branch in Google Maps</a>
+                <div className="loc__contact">
+                  <p className="eyebrow">RUMAGHOLU BRANCH / CALL & WHATSAPP</p>
+                  <a href="tel:08081688475">0808 168 8475</a>
+                  <a className="btn btn--crimson" href="https://wa.me/2348081688475?text=Hello%20OJAUTOLOUNGE%20AND%20SUITE%20Rumagholu%20branch%2C%20I%20would%20like%20to%20enquire%20about%20a%20room." target="_blank" rel="noopener noreferrer">WhatsApp This Branch</a>
+                </div>
               </div>
             );
           })}

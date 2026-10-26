@@ -21,11 +21,13 @@ export type Suite = {
   images: SuiteImage[];
   /** Only verified amenities. Empty list shows no amenity block. */
   amenities: string[];
-  /** Nightly rate. null = "Rate on request". Example when known: { amount: 45000, currency: "NGN" } */
+  /** Nightly rate. null = "Rate on request". */
   price: { amount: number; currency: string } | null;
 };
 
 export type MenuItem = { name: string; price?: number | null; note?: string };
+export type RoomRate = { name: string; amount: number };
+export type RoomRateGroup = { category: string; rooms: RoomRate[] };
 
 export const site = {
   brand: {
@@ -41,16 +43,77 @@ export const site = {
   location: {
     city: "Port Harcourt",
     region: "Rivers State, Nigeria",
-    /** Read from the property's own night sign in the supplied video. Confirm before launch. */
-    address: "#10 Okemini/Sars Link Road, Rumagholu, Port Harcourt, Rivers State",
-    landmark: "Checkers Pavilion",
-    addressConfirmed: false,
+    address: "No 2 Prince Amadi Close, Behind Nellyval Filling Station, Stadium Road, Port Harcourt",
+    landmark: "Behind Nellyval Filling Station",
+    addressConfirmed: true,
+    branches: [
+      {
+        name: "Okemini / Rumagholu Branch",
+        address: "#10 Okemini Sars Link Road, Opposite Anglican Church, Rumagholu, Port Harcourt, Rivers State",
+      },
+    ],
   },
 
   contact: {
-    whatsappNumber: "2348065971529",
+    whatsappNumber: "2347075091867",
+    phone: "0707 509 1867",
     instagram: null as string | null,
-    phone: null as string | null,
+  },
+
+  rates: {
+    mainBranch: [
+      {
+        category: "Apartment",
+        rooms: [{ name: "2 Bedroom Apartment", amount: 110000 }],
+      },
+      {
+        category: "Super Deluxe Room",
+        rooms: [
+          { name: "Lamborghini", amount: 40000 },
+          { name: "Rolls-Royce", amount: 40000 },
+          { name: "Jaguar", amount: 40000 },
+        ],
+      },
+      {
+        category: "Deluxe Room",
+        rooms: [
+          { name: "Ferrari", amount: 35000 },
+          { name: "Chrysler", amount: 35000 },
+          { name: "Porsche", amount: 35000 },
+        ],
+      },
+      {
+        category: "Executive Room",
+        rooms: [
+          { name: "Benz", amount: 30000 },
+          { name: "BMW", amount: 30000 },
+        ],
+      },
+      {
+        category: "Standard Room",
+        rooms: [
+          { name: "Bentley", amount: 25000 },
+          { name: "Mini Cooper", amount: 25000 },
+        ],
+      },
+    ] as RoomRateGroup[],
+    otherBranches: [
+      {
+        branchName: "Okemini / Rumagholu Branch",
+        address: "#10 Okemini Sars Link Road, Opposite Anglican Church, Rumagholu, Port Harcourt, Rivers State",
+        rooms: [
+          { category: "Standard", number: "101", amount: 15000 },
+          { category: "Standard", number: "102", amount: 15000 },
+          { category: "Executive", number: "113", amount: 20000 },
+          { category: "Executive", number: "114", amount: 20000 },
+          { category: "Executive", number: "115", amount: 20000 },
+          { category: "Executive", number: "116", amount: 20000 },
+          { category: "Executive", number: "117", amount: 20000 },
+          { category: "Executive", number: "118", amount: 20000 },
+          { category: "Suite", number: "119", amount: 35000 },
+        ],
+      },
+    ],
   },
 
   suites: [
@@ -60,7 +123,7 @@ export const site = {
       description: "The Ferrari-themed suite. Ask on WhatsApp for current availability and rate.",
       images: [],
       amenities: [],
-      price: null,
+      price: { amount: 35000, currency: "NGN" },
     },
     {
       id: "lamborghini",
@@ -75,7 +138,7 @@ export const site = {
         },
       ],
       amenities: [],
-      price: null,
+      price: { amount: 40000, currency: "NGN" },
     },
     {
       id: "porsche",
@@ -83,7 +146,7 @@ export const site = {
       description: "The Porsche-themed suite. Ask on WhatsApp for current availability and rate.",
       images: [],
       amenities: [],
-      price: null,
+      price: { amount: 35000, currency: "NGN" },
     },
     {
       id: "jaguar",
@@ -103,7 +166,7 @@ export const site = {
         },
       ],
       amenities: [],
-      price: null,
+      price: { amount: 40000, currency: "NGN" },
     },
   ] as Suite[],
 
@@ -134,7 +197,6 @@ export const site = {
     ],
   },
 
-  /** Leave empty until the real menu is supplied. */
   menu: {
     food: [] as MenuItem[],
     drinks: [] as MenuItem[],
@@ -161,6 +223,7 @@ export const site = {
   nav: [
     { label: "EXPERIENCE", href: "#experience" },
     { label: "SUITES", href: "#suites" },
+    { label: "RATES", href: "#rates" },
     { label: "FOOD & DRINKS", href: "#food" },
     { label: "NIGHTLIFE", href: "#nightlife" },
     { label: "LOCATION", href: "#location" },

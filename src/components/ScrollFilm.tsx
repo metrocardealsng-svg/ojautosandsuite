@@ -3,10 +3,6 @@ import { useEffect, useRef, useState } from "react";
 
 const STAGE_LABELS = ["Above the clouds", "Over the property", "Your escape starts here"];
 
-/**
- * Scroll-linked film. The page scrolls normally. The video time simply follows scroll position.
- * Falls back to a still poster for reduced motion or if the video cannot play.
- */
 export default function ScrollFilm() {
   const root = useRef<HTMLElement>(null);
   const vid = useRef<HTMLVideoElement>(null);
@@ -17,10 +13,38 @@ export default function ScrollFilm() {
     const v = vid.current;
     const el = root.current;
     if (!v || !el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const mobile = window.matchMedia("(max-width: 767px)").matches;
+
+    if (reducedMotion) {
       setMode("still");
       return;
     }
+
+    // Mobile browsers are unreliable when a video is constantly seeked to follow
+    // scroll. On phones, play the muted inline film normally; keep scroll-scrubbing on desktop.
+    if (mobile) {
+      v.muted = true;
+      v.defaultMuted = true;
+      v.playsInline = true;
+      v.loop = true;
+      v.preload = "auto";
+      const playFilm = () => {
+        v.play().then(() => setMode("film")).catch(() => setMode("still"));
+      };
+      const fail = () => setMode("still");
+      v.addEventListener("canplay", playFilm, { once: true });
+      v.addEventListener("error", fail);
+      if (v.readyState >= 3) playFilm();
+      else v.load();
+      return () => {
+        v.removeEventListener("canplay", playFilm);
+        v.removeEventListener("error", fail);
+        v.pause();
+      };
+    }
+
     let dur = 4.5;
     let target = 0;
     let cur = 0;
@@ -31,7 +55,9 @@ export default function ScrollFilm() {
       const d = target - cur;
       if (Math.abs(d) > 0.004) {
         cur += d * 0.22;
-        if (v.readyState >= 2) v.currentTime = cur;
+        if (v.readyState >= 2) {
+          try { v.currentTime = cur; } catch { /* wait for the next frame */ }
+        }
         raf = requestAnimationFrame(tick);
       }
     };
@@ -52,8 +78,6 @@ export default function ScrollFilm() {
     const fail = () => setMode("still");
     v.addEventListener("loadedmetadata", onMeta);
     v.addEventListener("error", fail);
-    const last = v.querySelector("source:last-of-type");
-    last?.addEventListener("error", fail);
     if (v.readyState >= 1) onMeta();
     window.addEventListener("scroll", update, { passive: true });
     window.addEventListener("resize", update);
@@ -62,7 +86,6 @@ export default function ScrollFilm() {
       cancelAnimationFrame(raf);
       v.removeEventListener("loadedmetadata", onMeta);
       v.removeEventListener("error", fail);
-      last?.removeEventListener("error", fail);
       window.removeEventListener("scroll", update);
       window.removeEventListener("resize", update);
     };
@@ -72,7 +95,7 @@ export default function ScrollFilm() {
     <section ref={root} id="arrival" className={`film film--${mode}`} aria-label="Arrival film">
       <div className="film__sticky">
         {mode === "film" ? (
-          <video ref={vid} className="film__video" muted playsInline preload="auto" poster="/video/arrival-poster.jpg" aria-hidden>
+          <video ref={vid} className="film__video" muted playsInline autoPlay loop preload="auto" poster="/video/arrival-poster.jpg" aria-hidden>
             <source src="/video/arrival.mp4" type='video/mp4; codecs="avc1.64001f"' />
             <source src="/video/arrival.webm" type='video/webm; codecs="vp9"' />
           </video>

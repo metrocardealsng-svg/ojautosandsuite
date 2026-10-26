@@ -9,7 +9,11 @@ export default function Footer() {
       <div className="wrap footer__grid">
         <Brand />
         <p className="muted">Availability, rates and bookings are confirmed by our team on WhatsApp.</p>
-        <a href={wa} target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
+        <div>
+          <a href={`tel:${site.contact.phone.replace(/\s/g, "")}`}>Call {site.contact.phone}</a>
+          <br />
+          <a href={wa} target="_blank" rel="noopener noreferrer">WhatsApp {site.contact.phone}</a>
+        </div>
       </div>
     </footer>
   );

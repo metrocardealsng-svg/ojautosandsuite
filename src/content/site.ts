@@ -121,7 +121,14 @@ export const site = {
       id: "ferrari",
       name: "Ferrari",
       description: "The Ferrari-themed suite. Ask on WhatsApp for current availability and rate.",
-      images: [],
+      images: [
+        {
+          src: "/public/rooms/ferrari.jpg",
+          alt: "Ferrari-themed suite interior concept created for OJAUTOLOUNGE AND SUITE",
+          kind: "concept",
+          caption: "Ferrari suite concept",
+        },
+      ],
       amenities: [],
       price: { amount: 35000, currency: "NGN" },
     },
@@ -144,7 +151,14 @@ export const site = {
       id: "porsche",
       name: "Porsche",
       description: "The Porsche-themed suite. Ask on WhatsApp for current availability and rate.",
-      images: [],
+      images: [
+        {
+          src: "/public/rooms/porsche.jpg",
+          alt: "Porsche-themed suite interior concept created for OJAUTOLOUNGE AND SUITE",
+          kind: "concept",
+          caption: "Porsche suite concept",
+        },
+      ],
       amenities: [],
       price: { amount: 35000, currency: "NGN" },
     },

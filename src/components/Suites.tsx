@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { site, type Suite } from "@/content/site";
 import { buildSuiteEnquiry, whatsappUrl } from "@/lib/whatsapp";
+import "./SuitesExperience.css";
 
 type OpenRoom = { index: number; rect: DOMRect } | null;
 

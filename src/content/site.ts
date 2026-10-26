@@ -205,6 +205,10 @@ export const site = {
       src: "/images/new/lounge-fridge.jpg",
       alt: "The drinks fridge in the lounge",
     },
+    cinematicSuiteTransition: {
+      src: "/Create_cinematic_using_image_2K_20261026152248.jpg",
+      alt: "Cinematic visual created for the OJAUTOLOUNGE AND SUITE room experience",
+    },
     food: [
       { src: "/images/real/food-1.jpg", alt: "A tray of carrot and pepper rice from the opening event" },
       { src: "/images/real/food-2.jpg", alt: "A tray of peppered meat from the opening event" },

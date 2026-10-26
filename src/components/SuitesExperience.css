@@ -1,0 +1,65 @@
+.world-suites { background: #07080c; color: #fff; overflow: clip; }
+.world-suites__intro { text-align: center; }
+.world-suites__intro .eyebrow { color: #fff; opacity: .65; }
+.world-suites__intro .lede { margin-inline: auto; color: rgba(255,255,255,.68); }
+.world-suites__intro .display b { color: #fff; }
+.world-suites__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; margin-top: clamp(2.5rem, 6vw, 5rem); }
+.world-card { position: relative; min-width: 0; padding: 0; border: 1px solid rgba(255,255,255,.1); border-radius: 18px; overflow: hidden; cursor: pointer; background: #000; color: #fff; aspect-ratio: 16 / 10; text-align: left; isolation: isolate; transform: translateZ(0); transition: transform .55s cubic-bezier(.2,.8,.2,1), box-shadow .55s ease, border-color .55s ease; }
+.world-card img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(.82) brightness(.72); transform: scale(1.01); transition: transform 1.1s cubic-bezier(.2,.8,.2,1), filter .6s ease; }
+.world-card__wash { position: absolute; inset: 0; background: radial-gradient(circle at 70% 20%, var(--glow), transparent 55%); opacity: .08; mix-blend-mode: screen; transition: opacity .5s; }
+.world-card__vignette { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.04) 20%, rgba(0,0,0,.88) 100%); }
+.world-card__scan { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, transparent 32%, color-mix(in srgb, var(--glow) 38%, transparent) 50%, transparent 68%); transform: translateX(-125%); transition: transform 1s ease; }
+.world-card__copy { position: absolute; left: clamp(18px, 3vw, 30px); right: 18px; bottom: clamp(18px, 3vw, 30px); display: grid; gap: 4px; z-index: 2; }
+.world-card__number { color: var(--glow); font: 700 .72rem/1 var(--body); letter-spacing: .25em; text-shadow: 0 0 16px var(--glow); }
+.world-card__copy strong { font: 800 clamp(2rem, 5vw, 4.6rem)/.9 var(--display); text-transform: uppercase; letter-spacing: .02em; text-shadow: 0 0 30px rgba(0,0,0,.65); }
+.world-card__copy em { font-style: normal; font-size: .9rem; color: rgba(255,255,255,.76); }
+.world-card__copy small { width: max-content; margin-top: 7px; padding: 5px 8px; border: 1px solid rgba(255,255,255,.25); border-radius: 999px; font-size: .62rem; letter-spacing: .15em; }
+.world-card__enter { position: absolute; top: 18px; right: 18px; z-index: 2; padding: 8px 11px; border: 1px solid rgba(255,255,255,.2); border-radius: 999px; background: rgba(0,0,0,.25); backdrop-filter: blur(8px); font-size: .7rem; letter-spacing: .13em; }
+.world-card:hover, .world-card:focus-visible { transform: translateY(-8px) scale(1.015); border-color: var(--glow); outline: none; box-shadow: 0 0 0 1px var(--glow), 0 0 32px var(--glow), 0 0 90px color-mix(in srgb, var(--glow) 34%, transparent); }
+.world-card:hover img, .world-card:focus-visible img { transform: scale(1.08); filter: saturate(1.12) brightness(1.02); }
+.world-card:hover .world-card__wash, .world-card:focus-visible .world-card__wash { opacity: .32; }
+.world-card:hover .world-card__scan, .world-card:focus-visible .world-card__scan { transform: translateX(125%); }
+.world-card:hover .world-card__enter { border-color: var(--glow); box-shadow: 0 0 20px var(--glow); }
+
+.room-world { position: fixed; inset: 0; z-index: 9999; background: #000; overflow: hidden; transition: clip-path .8s cubic-bezier(.76,0,.24,1); }
+.room-world__stage { position: absolute; inset: -5%; --px: 0; --py: 0; }
+.room-world__img { width: 100%; height: 100%; object-fit: cover; transform: translate3d(calc(var(--px) * -18px), calc(var(--py) * -12px), 0) scale(1.08); animation: suiteWorldZoom 18s ease-in-out infinite alternate; }
+@keyframes suiteWorldZoom { from { scale: 1; } to { scale: 1.1; } }
+.room-world__glow { position: absolute; inset: 0; background: radial-gradient(circle at 55% 28%, var(--glow), transparent 62%); mix-blend-mode: soft-light; opacity: .42; animation: suiteWorldPulse 4s ease-in-out infinite; }
+@keyframes suiteWorldPulse { 50% { opacity: .72; } }
+.room-world__vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 34%, rgba(0,0,0,.7) 100%), linear-gradient(to top, rgba(0,0,0,.9), transparent 48%); }
+.room-world__particles i { position: absolute; bottom: -10px; left: calc(var(--k) * 5.5%); width: 4px; height: 4px; border-radius: 50%; background: var(--glow2); box-shadow: 0 0 14px 3px var(--glow2); opacity: 0; animation: suiteParticle calc(6s + var(--k) * .35s) linear calc(var(--k) * -.6s) infinite; }
+@keyframes suiteParticle { 0% { transform: translateY(0); opacity: 0; } 15% { opacity: .9; } 100% { transform: translateY(-105vh) translateX(30px); opacity: 0; } }
+.room-world__ui { position: absolute; left: clamp(24px, 7vw, 90px); right: 24px; bottom: clamp(34px, 9vh, 100px); max-width: 760px; z-index: 2; }
+.room-world__eyebrow { color: var(--glow); font-size: .74rem; letter-spacing: .28em; text-transform: uppercase; text-shadow: 0 0 15px var(--glow); }
+.room-world__ui h3 { margin-top: 10px; font: 800 clamp(3.4rem, 10vw, 8rem)/.82 var(--display); text-transform: uppercase; text-shadow: 0 0 42px var(--glow); }
+.room-world__ui > p:not(.room-world__eyebrow) { margin-top: 1rem; max-width: 46ch; color: rgba(255,255,255,.8); font-size: 1.05rem; }
+.room-world__concept { display: inline-block; margin-top: 1rem; color: rgba(255,255,255,.72); font-size: .68rem; letter-spacing: .16em; }
+.room-world__actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 1.5rem; }
+.room-world__cta, .room-world__secondary { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; padding: 0 18px; border-radius: 999px; text-decoration: none; font: 700 .75rem/1 var(--body); letter-spacing: .1em; }
+.room-world__cta { color: #fff; border: 1px solid var(--glow); background: color-mix(in srgb, var(--glow) 30%, transparent); box-shadow: 0 0 28px var(--glow); }
+.room-world__secondary { color: #fff; border: 1px solid rgba(255,255,255,.35); background: rgba(0,0,0,.25); backdrop-filter: blur(10px); }
+.room-world__close, .room-world__nav { position: absolute; z-index: 3; color: #fff; border: 1px solid rgba(255,255,255,.25); background: rgba(0,0,0,.32); backdrop-filter: blur(10px); cursor: pointer; border-radius: 999px; }
+.room-world__close { top: 22px; right: 22px; width: 48px; height: 48px; font-size: 1.4rem; }
+.room-world__nav { top: 50%; width: 54px; height: 54px; font-size: 2rem; transform: translateY(-50%); }
+.room-world__nav--prev { left: 18px; }
+.room-world__nav--next { right: 18px; }
+.room-world__close:hover, .room-world__nav:hover { border-color: var(--glow); box-shadow: 0 0 24px var(--glow); }
+
+@media (max-width: 700px) {
+  .world-suites__grid { grid-template-columns: 1fr; gap: 16px; }
+  .world-card { aspect-ratio: 4 / 3; border-radius: 14px; }
+  .world-card__copy strong { font-size: clamp(2.5rem, 13vw, 4.2rem); }
+  .room-world__ui { left: 24px; right: 70px; bottom: 34px; }
+  .room-world__ui h3 { font-size: clamp(3.2rem, 18vw, 6rem); }
+  .room-world__ui > p:not(.room-world__eyebrow) { font-size: .96rem; }
+  .room-world__nav { width: 44px; height: 44px; }
+  .room-world__nav--prev { left: 10px; }
+  .room-world__nav--next { right: 10px; }
+  .room-world__actions { display: grid; grid-template-columns: 1fr; }
+  .room-world__cta, .room-world__secondary { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .world-card, .world-card img, .world-card__scan, .room-world, .room-world__img, .room-world__glow, .room-world__particles i { animation: none !important; transition-duration: .01s !important; }
+}
